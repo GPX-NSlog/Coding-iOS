@@ -54,7 +54,7 @@ static User *curLoginUser;
     }
     return nil;
 }
-
+/** 判断是否登录*/
 + (BOOL)isLogin{
     NSNumber *loginStatus = [[NSUserDefaults standardUserDefaults] objectForKey:kLoginStatus];
     if (loginStatus.boolValue && [Login curLoginUser]) {
@@ -89,6 +89,8 @@ static User *curLoginUser;
     }
 }
 
+
+/** 读取登录信息*/
 + (NSMutableDictionary *)readLoginDataList{
     NSMutableDictionary *loginDataList = [NSMutableDictionary dictionaryWithContentsOfFile:[self loginDataListPath]];
     if (!loginDataList) {
@@ -97,6 +99,12 @@ static User *curLoginUser;
     return loginDataList;
 }
 
+/**
+ 保存登录信息
+
+ @param loginData 请求下来的登录数据
+ @return 是否保存
+ */
 + (BOOL)saveLoginData:(NSDictionary *)loginData{
     BOOL saved = NO;
     if (loginData) {
@@ -121,6 +129,7 @@ static User *curLoginUser;
     return saved;
 }
 
+/** 保存登录信息的路径*/
 + (NSString *)loginDataListPath{
     NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
     return [documentPath stringByAppendingPathComponent:kLoginDataListPath];
@@ -177,7 +186,7 @@ static User *curLoginUser;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     return [defaults objectForKey:kLoginPreUserEmail];
 }
-
+/** 获取当前用户的信息*/
 + (User *)curLoginUser{
     if (!curLoginUser) {
         NSDictionary *loginData = [[NSUserDefaults standardUserDefaults] objectForKey:kLoginUserDict];

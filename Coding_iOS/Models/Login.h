@@ -22,6 +22,7 @@
 + (void) doLogout;
 + (void)setPreUserEmail:(NSString *)emailStr;
 + (NSString *)preUserEmail;
+/** 获取当前用户的信息*/
 + (User *)curLoginUser;
 + (void)setXGAccountWithCurUser;
 + (User *)userWithGlobaykeyOrEmail:(NSString *)textStr;
