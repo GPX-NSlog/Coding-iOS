@@ -4,7 +4,7 @@
 //
 //  Created by Ease on 15/5/7.
 //  Copyright (c) 2015年 Coding. All rights reserved.
-//
+//  登录注册时账号的提示tableView
 
 #import "EaseInputTipsView.h"
 #import "Login.h"

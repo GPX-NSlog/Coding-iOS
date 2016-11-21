@@ -10,8 +10,10 @@
 
 @interface Register : NSObject
 //请求
-@property (readwrite, nonatomic, strong) NSString *email, *global_key, *j_captcha, *phone, *code, *password, *confirm_password;
+@property (readwrite, nonatomic, strong) NSString *email, *j_captcha, *phone, *code, *password, *confirm_password;
 
+/** 个信后缀*/
+@property (readwrite, nonatomic, strong) NSString *global_key;
 + (NSString *)channel;
 
 - (NSDictionary *)toParams;

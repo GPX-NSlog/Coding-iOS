@@ -180,6 +180,7 @@
     [testView.layer insertSublayer:layer atIndex:0];
     cell.backgroundView = testView;
 }
+
 - (void)addLineforPlainCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath withLeftSpace:(CGFloat)leftSpace{
     [self addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:leftSpace hasSectionLine:YES];
 }

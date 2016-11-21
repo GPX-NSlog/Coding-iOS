@@ -10,7 +10,7 @@
 #import "XGPush.h"
 #import "AppDelegate.h"
 
-#define kLoginStatus @"login_status"
+#define kLoginStatus @"login_status" // 登录状态
 #define kLoginPreUserEmail @"pre_user_email"
 #define kLoginUserDict @"user_dict"
 #define kLoginDataListPath @"login_data_list_path.plist"
@@ -57,9 +57,9 @@ static User *curLoginUser;
 /** 判断是否登录*/
 + (BOOL)isLogin{
     NSNumber *loginStatus = [[NSUserDefaults standardUserDefaults] objectForKey:kLoginStatus];
-    if (loginStatus.boolValue && [Login curLoginUser]) {
+    if (loginStatus.boolValue && [Login curLoginUser]) { // 是否存储了
         User *loginUser = [Login curLoginUser];
-        if (loginUser.status && loginUser.status.integerValue == 0) {
+        if (loginUser.status && loginUser.status.integerValue == 0) { // 判断当前用户是否存在
             return NO;
         }
         return YES;
@@ -68,6 +68,11 @@ static User *curLoginUser;
     }
 }
 
+/**
+ 登录是时的操作
+
+ @param loginData 登录成功后请求下载的数据
+ */
 + (void)doLogin:(NSDictionary *)loginData{
     
 //    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookies];
@@ -79,7 +84,7 @@ static User *curLoginUser;
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:[NSNumber numberWithBool:YES] forKey:kLoginStatus];
         [defaults setObject:loginData forKey:kLoginUserDict];
-        curLoginUser = [NSObject objectOfClass:@"User" fromJSON:loginData];
+        curLoginUser = [NSObject objectOfClass:@"User" fromJSON:loginData]; // 字典转模型
         [defaults synchronize];
         [Login setXGAccountWithCurUser];
         
@@ -144,6 +149,7 @@ static User *curLoginUser;
     return [NSObject objectOfClass:@"User" fromJSON:loginData];
 }
 
+/** 推送*/
 + (void)setXGAccountWithCurUser{
     if ([self isLogin]) {
         User *user = [Login curLoginUser];
@@ -157,7 +163,7 @@ static User *curLoginUser;
         [XGPush unRegisterDevice];
     }
 }
-
+/** 退出登录*/
 + (void)doLogout{
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -172,7 +178,7 @@ static User *curLoginUser;
     }];
     [Login setXGAccountWithCurUser];
 }
-
+/** 记住账号*/
 + (void)setPreUserEmail:(NSString *)emailStr{
     if (emailStr.length <= 0) {
         return;
@@ -181,15 +187,21 @@ static User *curLoginUser;
     [defaults setObject:emailStr forKey:kLoginPreUserEmail];
     [defaults synchronize];
 }
-
+/** 获取账号*/
 + (NSString *)preUserEmail{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     return [defaults objectForKey:kLoginPreUserEmail];
 }
-/** 获取当前用户的信息*/
+/**
+ 获取当前用户的信息
+
+ @return 返回一个用户模型
+ */
 + (User *)curLoginUser{
     if (!curLoginUser) {
+        //取出存储的字典数据
         NSDictionary *loginData = [[NSUserDefaults standardUserDefaults] objectForKey:kLoginUserDict];
+        // 字典转模型
         curLoginUser = loginData? [NSObject objectOfClass:@"User" fromJSON:loginData]: nil;
     }
     return curLoginUser;

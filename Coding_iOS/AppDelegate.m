@@ -91,22 +91,24 @@
     
     //UIWebView 的 User-Agent
     [self registerUserAgent];
-
-    if ([Login isLogin]) {
+#warning read here
+    if ([Login isLogin]) { // 如果登录了
         [self setupTabViewController];
-    }else{
+    }else{ // 未登录
         [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         [self setupIntroductionViewController];
     }
     [self.window makeKeyAndVisible];
     [FunctionIntroManager showIntroPage];
 
-    EaseStartView *startView = [EaseStartView startView];
+  /*
+   EaseStartView *startView = [EaseStartView startView];
     @weakify(self);
     [startView startAnimationWithCompletionBlock:^(EaseStartView *easeStartView) {
         @strongify(self);
         [self completionStartAnimationWithOptions:launchOptions];
     }];
+   */
     
 #if DEBUG
 //    [[RRFPSBar sharedInstance] setShowsAverage:YES];

@@ -49,7 +49,7 @@
         
         if ([reuseIdentifier isEqualToString:kCellIdentifier_Input_OnlyText_Cell_Text]) {
             
-        }else if ([reuseIdentifier isEqualToString:kCellIdentifier_Input_OnlyText_Cell_Captcha]){
+        }else if ([reuseIdentifier isEqualToString:kCellIdentifier_Input_OnlyText_Cell_Captcha]){ // 图片验证码
             __weak typeof(self) weakSelf = self;
             if (!_captchaView) {
                 _captchaView = [[UITapImageView alloc] initWithFrame:CGRectMake(kScreen_Width - 60 - kLoginPaddingLeftWidth, (44-25)/2, 60, 25)];
@@ -68,7 +68,7 @@
                     make.center.equalTo(self.captchaView);
                 }];
             }
-        }else if ([reuseIdentifier isEqualToString:kCellIdentifier_Input_OnlyText_Cell_Password]){
+        }else if ([reuseIdentifier isEqualToString:kCellIdentifier_Input_OnlyText_Cell_Password]){ // 密码
             if (!_passwordBtn) {
                 _textField.secureTextEntry = YES;
 
@@ -77,13 +77,13 @@
                 [_passwordBtn addTarget:self action:@selector(passwordBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
                 [self.contentView addSubview:_passwordBtn];
             }
-        }else if ([reuseIdentifier hasPrefix:kCellIdentifier_Input_OnlyText_Cell_PhoneCode_Prefix]){
+        }else if ([reuseIdentifier hasPrefix:kCellIdentifier_Input_OnlyText_Cell_PhoneCode_Prefix]){ // 手机验证码
             if (!_verify_codeBtn) {
                 _verify_codeBtn = [[PhoneCodeButton alloc] initWithFrame:CGRectMake(kScreen_Width - 80 - kLoginPaddingLeftWidth, (44-25)/2, 80, 25)];
                 [_verify_codeBtn addTarget:self action:@selector(phoneCodeButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
                 [self.contentView addSubview:_verify_codeBtn];
             }
-        }else if ([reuseIdentifier isEqualToString:kCellIdentifier_Input_OnlyText_Cell_Phone]){
+        }else if ([reuseIdentifier isEqualToString:kCellIdentifier_Input_OnlyText_Cell_Phone]){ // 电话号码
             _countryCodeL = ({
                 UILabel *label = [UILabel new];
                 label.font = [UIFont systemFontOfSize:17];
@@ -131,6 +131,7 @@
 }
 
 - (void)prepareForReuse{
+    [super prepareForReuse];
     self.isForLoginVC = NO;
     if (![self.reuseIdentifier isEqualToString:kCellIdentifier_Input_OnlyText_Cell_Password]) {
         self.textField.secureTextEntry = NO;
@@ -156,11 +157,13 @@
     [self textValueChanged:nil];
 }
 
+/** 发送验证码*/
 - (void)phoneCodeButtonClicked:(id)sender{
     if (self.phoneCodeBtnClckedBlock) {
         self.phoneCodeBtnClckedBlock(sender);
     }
 }
+/** 手机号码前缀*/
 - (void)countryCodeBtnClicked:(id)sender{
     if (_countryCodeBtnClickedBlock) {
         _countryCodeBtnClickedBlock();
@@ -170,7 +173,7 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
-    if (_isForLoginVC) {
+    if (_isForLoginVC) { // 登录界面
         if (!_clearBtn) {
             _clearBtn = [UIButton new];
             _clearBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
@@ -233,6 +236,7 @@
 }
 
 #pragma Captcha
+/** 刷新验证码*/
 - (void)refreshCaptchaImage{
     __weak typeof(self) weakSelf = self;
     if (_activityIndicator.isAnimating) {
@@ -242,6 +246,7 @@
     [self.captchaView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@api/getCaptcha", [NSObject baseURLStr]]] placeholderImage:nil options:(SDWebImageRetryFailed | SDWebImageRefreshCached | SDWebImageHandleCookies) completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [weakSelf.activityIndicator stopAnimating];
     }];
+    
 }
 
 #pragma mark TextField

@@ -59,10 +59,23 @@
     return self;
 }
 
+/**
+ 跟去index的值取出image的key
+
+ @param index 索引
+ @return key值
+ */
 - (NSString *)imageKeyForIndex:(NSInteger)index{
     return [NSString stringWithFormat:@"%ld_image", (long)index];
 }
 
+
+/**
+ 跟去index的值取出view的key
+ 
+ @param index 索引
+ @return key值
+ */
 - (NSString *)viewKeyForIndex:(NSInteger)index{
     return [NSString stringWithFormat:@"%ld_view", (long)index];
 }
@@ -113,6 +126,7 @@
 }
 
 #pragma Views
+/** 配置view*/
 - (void)configureViews{
     [self configureButtonsAndPageControl];
 
@@ -125,20 +139,19 @@
     for (int i = 0; i < self.numberOfPages; i++) {
         NSString *imageKey = [self imageKeyForIndex:i];
         NSString *viewKey = [self viewKeyForIndex:i];
-        NSString *iconImageName = [self.iconsDict objectForKey:imageKey];
-        NSString *tipImageName = [self.tipsDict objectForKey:imageKey];
-        
+        NSString *iconImageName = [self.iconsDict objectForKey:imageKey]; // 根据key去取出图片名字
+        NSString *tipImageName = [self.tipsDict objectForKey:imageKey]; // 根据key去取出view
         if (iconImageName) {
             UIImage *iconImage = [UIImage imageNamed:iconImageName];
             if (iconImage) {
-                iconImage = scaleFactor != 1.0? [iconImage scaleByFactor:scaleFactor] : iconImage;
+                iconImage = scaleFactor != 1.0? [iconImage scaleByFactor:scaleFactor] : iconImage; // 图片缩放
                 UIImageView *iconView = [[UIImageView alloc] initWithImage:iconImage];
                 [self.contentView addSubview:iconView];
-                [self.iconsDict setObject:iconView forKey:viewKey];
+                [self.iconsDict setObject:iconView forKey:viewKey];// 覆盖 UIImageView替换NSStrig
             }
         }
         
-        if (tipImageName) {
+        if (tipImageName) { // 覆盖 替换
             UIImage *tipImage = [UIImage imageNamed:tipImageName];
             if (tipImage) {
                 tipImage = scaleFactor != 1.0? [tipImage scaleByFactor:scaleFactor]: tipImage;
@@ -148,8 +161,9 @@
             }
         }
     }
-}
 
+}
+/** 设置按钮*/
 - (void)configureButtonsAndPageControl{
 //    Button
     UIColor *darkColor = kColorBrandGreen;
@@ -158,6 +172,7 @@
     CGFloat paddingToCenter = kScaleFrom_iPhone5_Desgin(10);
     CGFloat paddingToBottom = kScaleFrom_iPhone5_Desgin(20);
     
+    // 注册
     self.registerBtn = ({
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button addTarget:self action:@selector(registerBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -171,6 +186,7 @@
         button.layer.cornerRadius = buttonHeight/2;
         button;
     });
+    // 登录
     self.loginBtn = ({
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button addTarget:self action:@selector(loginBtnClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -201,7 +217,7 @@
         make.bottom.equalTo(self.view).offset(-paddingToBottom);
     }];
     
-//    PageControl
+    // PageControl
     UIImage *pageIndicatorImage = [UIImage imageNamed:@"intro_dot_unselected"];
     UIImage *currentPageIndicatorImage = [UIImage imageNamed:@"intro_dot_selected"];
 
@@ -233,7 +249,8 @@
 }
 
 
-#pragma mark Animations
+#pragma mark Animations 
+/** 设置动画*/
 - (void)configureAnimations{
     [self configureTipAndTitleViewAnimations];
 }

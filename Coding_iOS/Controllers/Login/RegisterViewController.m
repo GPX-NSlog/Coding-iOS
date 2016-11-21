@@ -75,6 +75,7 @@
     [self configBottomView];
 }
 
+/** 获取图片验证码*/
 - (void)refreshCaptchaNeeded{
     __weak typeof(self) weakSelf = self;
     [[Coding_NetAPIManager sharedManager] request_CaptchaNeededWithPath:@"api/captcha/register" andBlock:^(id data, NSError *error) {
@@ -207,7 +208,7 @@
                                                                           (weakSelf.medthodType == RegisterMethodPhone && phone.length > 0 && code.length > 0)));
                                                          return @(enabled);
                                                      }];
-    //label
+    //label 富文本
     UITTTAttributedLabel *lineLabel = ({
         UITTTAttributedLabel *label = [[UITTTAttributedLabel alloc] init];
         label.textAlignment = NSTextAlignmentCenter;
@@ -322,6 +323,7 @@
         }
     }
     [tableView addLineforPlainCell:cell forRowAtIndexPath:indexPath withLeftSpace:kLoginPaddingLeftWidth];
+    
     return cell;
 }
 
@@ -333,7 +335,8 @@
 - (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithTransitInformation:(NSDictionary *)components{
     [self gotoServiceTermsVC];
 }
-#pragma mark Btn Clicked
+#pragma mark Btn Clicked 
+/** 发送验证码*/
 - (void)phoneCodeBtnClicked:(PhoneCodeButton *)sender{
     if (![_myRegister.phone isPhoneNo]) {
         [NSObject showHudTipStr:@"手机号码格式有误"];
@@ -351,11 +354,11 @@
         }
     }];
 }
-
+/** 注册*/
 - (void)sendRegister{
     if (![_myRegister.global_key isGK]) {
         [NSObject showHudTipStr:@"个性后缀仅支持英文字母、数字、横线(-)以及下划线(_)"];
-        return;
+         return;
     }
     __weak typeof(self) weakSelf = self;
     NSMutableDictionary *params = @{@"channel": [Register channel],
