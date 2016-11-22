@@ -91,7 +91,6 @@
     
     //UIWebView 的 User-Agent
     [self registerUserAgent];
-#warning read here
     if ([Login isLogin]) { // 如果登录了
         [self setupTabViewController];
     }else{ // 未登录
