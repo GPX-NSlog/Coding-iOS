@@ -79,6 +79,7 @@
         icarousel;
     });
     __weak typeof(_myCarousel) weakCarousel = _myCarousel;
+    
     //初始化过滤目录
     _myFliterMenu = [[PopFliterMenu alloc] initWithFrame:CGRectMake(0, 64, kScreen_Width, kScreen_Height - 64) items:nil];
     __weak typeof(self) weakSelf = self;
@@ -108,11 +109,14 @@
         _myPopMenu.perRowItemCount = 3;
         _myPopMenu.menuAnimationType = kPopMenuAnimationTypeSina;
     }
+    
     @weakify(self);
     _myPopMenu.didSelectedItemCompletion = ^(MenuItem *selectedItem){
         @strongify(self);
         if (!selectedItem) return;
+        
         [MobClick event:kUmeng_Event_Request_ActionOfLocal label:[NSString stringWithFormat:@"首页_添加_%@", selectedItem.title]];
+        
         switch (selectedItem.index) {
             case 0:
                 [self goToNewProjectVC];
@@ -133,7 +137,7 @@
                 [self goTo2FA];
                 break;
             default:
-                NSLog(@"%@",selectedItem.title);
+                DebugLog(@"%@",selectedItem.title);
                 break;
         }
     };
@@ -327,11 +331,13 @@
     }];
 }
 #pragma mark VC
+/** 创建新项目*/
 - (void)goToNewProjectVC{
     UIStoryboard *newProjectStoryboard = [UIStoryboard storyboardWithName:@"NewProject" bundle:nil];
     UIViewController *newProjectVC = [newProjectStoryboard instantiateViewControllerWithIdentifier:@"NewProjectVC"];
     [self.navigationController pushViewController:newProjectVC animated:YES];
 }
+/** 添加新任务*/
 - (void)goToNewTaskVC{
     __weak typeof(self) weakSelf = self;
     ProjectToChooseListViewController *chooseVC = [[ProjectToChooseListViewController alloc] init];
@@ -340,7 +346,7 @@
     };
     [self.navigationController pushViewController:chooseVC animated:YES];
 }
-
+/** 给指定的项目添加任务*/
 - (void)goToNewTaskFromVC:(ProjectToChooseListViewController *)proListVC withPro:(Project *)project{
     EditTaskViewController *taskVC = [EditTaskViewController new];
     taskVC.myTask = [Task taskWithProject:project andUser:[Login curLoginUser]];
@@ -351,7 +357,7 @@
     };
     [proListVC.navigationController pushViewController:taskVC animated:YES];
 }
-
+/** 新的冒泡*/
 - (void)goToNewTweetVC{
     TweetSendViewController *vc = [[TweetSendViewController alloc] init];
     vc.sendNextTweet = ^(Tweet *nextTweet){
@@ -365,6 +371,8 @@
     UINavigationController *nav = [[BaseNavigationController alloc] initWithRootViewController:vc];
     [self.parentViewController presentViewController:nav animated:YES completion:nil];
 }
+
+/** 两部验证*/
 - (void)goTo2FA{
     OTPListViewController *vc = [OTPListViewController new];
     [self.navigationController pushViewController:vc animated:YES];
@@ -374,11 +382,15 @@
     vc.myProject = project;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+/** 添加好友*/
 - (void)goToAddUserVC{
     AddUserViewController *vc = [[AddUserViewController alloc] init];
     vc.type = AddUserTypeFollow;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+/** 私信*/
 - (void)goToMessageVC{
     UsersViewController *vc = [[UsersViewController alloc] init];
     vc.curUsers = [Users usersWithOwner:[Login curLoginUser] Type:UsersTypeFriends_Message];

@@ -142,8 +142,7 @@
         [convertStr appendString:@"我关注的"];
     }else if ([keyStr isEqualToString:@"stared"]) {
         [convertStr appendString:@"我收藏的"];
-    }else
-    {
+    }else {
         NSLog(@"-------------error type:%@",keyStr);
     }
     if ([[aDic objectForKey:keyStr] length]>0) {
@@ -230,8 +229,7 @@
             titleLab.textColor=(indexPath.row+kfirstRowNum==_selectNum)?kColorBrandGreen:kColor222;
             titleLab.text=[self formatTitleStr:[_items objectAtIndex:3+indexPath.row-1]];
         }
-    }else
-    {
+    }else {
         if(indexPath.row==0){
             [titleLab removeFromSuperview];
             UIView *seperatorLine=[[UIView alloc] initWithFrame:CGRectMake(20, 15, self.bounds.size.width-40, 0.5)];
@@ -254,8 +252,8 @@
     return ((indexPath.row==0)&&(indexPath.section==1))||((indexPath.row==0)&&(indexPath.section==2))?30.5:50;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+#warning read here
     if (indexPath.section==0) {
         _selectNum=indexPath.row;
         [self dismissMenu];
