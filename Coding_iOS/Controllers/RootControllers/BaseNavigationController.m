@@ -26,10 +26,11 @@
     if (!_navLineV) {
         _navLineV = [[UIView alloc]initWithFrame:CGRectMake(0, 44, kScreen_Width, 1.0/ [UIScreen mainScreen].scale)];
         _navLineV.backgroundColor = kColorCCC;
+        _navLineV.backgroundColor = [UIColor redColor];
         [self.navigationBar addSubview:_navLineV];
     }
 }
-
+/** 隐藏导航栏黑线*/
 - (void)hideBorderInView:(UIView *)view{
 
     
@@ -41,7 +42,7 @@
         [self hideBorderInView:subView];
     }
 }
-
+#warning read here
 - (BOOL)shouldAutorotate{
     return [self.visibleViewController shouldAutorotate];
 
