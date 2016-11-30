@@ -42,7 +42,7 @@
         [self hideBorderInView:subView];
     }
 }
-#warning read here
+
 - (BOOL)shouldAutorotate{
     return [self.visibleViewController shouldAutorotate];
 
