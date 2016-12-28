@@ -60,7 +60,7 @@
     self.myLogin = [[Login alloc] init];
     self.myLogin.email = [Login preUserEmail];
     _captchaNeeded = NO;
-
+  
     //    添加myTableView
     _myTableView = ({
         TPKeyboardAvoidingTableView *tableView = [[TPKeyboardAvoidingTableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
@@ -185,6 +185,7 @@
     [self.view endEditing:YES];
 }
 
+/** 左上角 X */
 - (void)showdismissButton:(BOOL)willShow{
     self.dismissButton.hidden = !willShow;
     if (!self.dismissButton && willShow) {
@@ -280,7 +281,7 @@
     }else{
         iconUserViewWidth = 75;
     }
-    
+
     UIView *headerV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreen_Width, kScreen_Height/3)];
     
     _iconUserView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, iconUserViewWidth, iconUserViewWidth)];

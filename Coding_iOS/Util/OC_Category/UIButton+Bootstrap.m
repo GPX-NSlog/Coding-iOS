@@ -31,7 +31,7 @@
     [self bootstrapStyle];
     self.backgroundColor = kColorBrandGreen;
     self.layer.borderColor = [kColorBrandGreen CGColor];
-    [self setBackgroundImage:[self buttonImageFromColor:[UIColor colorWithHexString:@"0x28a464"]] forState:UIControlStateHighlighted];
+    [self setBackgroundImage:[self buttonImageFromColor:[UIColor colorWithHexString:@"  "]] forState:UIControlStateHighlighted];
 }
 
 -(void)successStyle{

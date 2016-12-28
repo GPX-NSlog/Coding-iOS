@@ -125,7 +125,7 @@
 #pragma mark BaseURL
 + (NSString *)baseURLStr{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return [defaults valueForKey:kBaseURLStr] ?: kBaseURLStr;
+    return [defaults valueForKey:kBaseURLStr] ? : kBaseURLStr;
 }
 
 + (BOOL)baseURLStrIsProduction{

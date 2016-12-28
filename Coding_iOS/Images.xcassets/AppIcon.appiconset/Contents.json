@@ -75,68 +75,101 @@
       "scale" : "2x"
     },
     {
-      "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "29X29-1.png",
+      "size" : "29x29",
       "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "29x29",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "40x40",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "40x40",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "76x76",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "76x76",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "size" : "83.5x83.5",
+      "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "ipad",
       "filename" : "58x58-1.png",
+      "unassigned" : true,
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
       "filename" : "40x40.png",
+      "unassigned" : true,
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
       "filename" : "80x80-1.png",
+      "unassigned" : true,
       "scale" : "2x"
     },
     {
       "size" : "50x50",
       "idiom" : "ipad",
       "filename" : "50x50.png",
+      "unassigned" : true,
       "scale" : "1x"
     },
     {
       "size" : "50x50",
       "idiom" : "ipad",
       "filename" : "100x100.png",
+      "unassigned" : true,
       "scale" : "2x"
     },
     {
       "size" : "72x72",
       "idiom" : "ipad",
       "filename" : "72x72.png",
+      "unassigned" : true,
       "scale" : "1x"
     },
     {
       "size" : "72x72",
       "idiom" : "ipad",
       "filename" : "144x144.png",
+      "unassigned" : true,
       "scale" : "2x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
       "filename" : "76x76.png",
+      "unassigned" : true,
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
       "filename" : "152x152.png",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "ipad",
-      "size" : "83.5x83.5",
+      "unassigned" : true,
       "scale" : "2x"
     }
   ],

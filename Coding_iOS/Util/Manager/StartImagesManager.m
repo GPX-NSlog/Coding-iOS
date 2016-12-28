@@ -116,7 +116,6 @@
 - (void)loadStartImages{
     NSArray *plistArray = [NSArray arrayWithContentsOfFile:[self pathOfSTPlist]];
     plistArray = [NSObject arrayFromJSON:plistArray ofObjects:@"StartImage"];
-
     NSMutableArray *imageLoadedArray = [[NSMutableArray alloc] init];
     NSFileManager *fm = [NSFileManager defaultManager];
     
@@ -167,7 +166,6 @@
     if (![AFNetworkReachabilityManager sharedManager].reachableViaWiFi) {
         return;
     }
-    
     NSArray *plistArray = [NSArray arrayWithContentsOfFile:[self pathOfSTPlist]];
     plistArray = [NSObject arrayFromJSON:plistArray ofObjects:@"StartImage"];
     
@@ -217,9 +215,7 @@
 - (NSString *)pathDisk{
     if (!_pathDisk && _url) {
         NSString *documentPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) firstObject];
-        _pathDisk = [[documentPath
-                      stringByAppendingPathComponent:@"Coding_StartImages"]
-                     stringByAppendingPathComponent:[[_url componentsSeparatedByString:@"/"] lastObject]];
+        _pathDisk = [[documentPath stringByAppendingPathComponent:@"Coding_StartImages"] stringByAppendingPathComponent:[[_url componentsSeparatedByString:@"/"] lastObject]];
     }
     return _pathDisk;
 }
